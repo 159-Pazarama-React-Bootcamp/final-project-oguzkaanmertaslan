@@ -1,0 +1,61 @@
+.user-ticket-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .user-ticket-code-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    width: 55%;
+    box-shadow: 0 0.3rem 0.8rem rgb(0 0 0 / 24%);
+    border-radius: 20px;
+  }
+  .user-ticket-information-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 55%;
+    margin-top: 20px;
+    box-shadow: 0 0.3rem 0.8rem rgb(0 0 0 / 24%);
+    border-radius: 20px;
+  }
+  .user-ticket-left-area {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 20px;
+    margin-left: 20px;
+  
+  }
+  .user-ticket-right-area {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 20px;
+  
+  }
+  .user-ticket-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+    font-size: 20px;
+    color: #575454;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .succsess-logo{
+    display: flex;
+    align-items: center;
+  }
+  .succsess-logo img{
+    height: 75px;
+  }
+  
