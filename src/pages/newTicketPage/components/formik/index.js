@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch } from "react-redux";
 import { createTicket } from "../../../../services";
+import { saveTicket } from "../../../../redux/features/ticketSlice";
 import "./style.css";
 
 const Form = () => {
   
   const history = useHistory();
-
+  const dispatch=useDispatch();
   const [ticketNumber] = useState(
     `TCKT-${Math.floor(Math.random() * 90000) + 10000}`
   );
@@ -39,6 +41,9 @@ const Form = () => {
       validateSheme={validateSheme}
       onSubmit={(values) => {
         createTicket(values);
+        dispatch(saveTicket({
+          item:values
+        }))
         history.push("/basvuru-basarili")
       }}
     >
