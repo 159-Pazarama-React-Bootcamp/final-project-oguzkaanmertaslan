@@ -16,9 +16,9 @@ const getUser = async () => {
 const getTicketsByStatus = async (status) => {
   let response;
   if (status === "all") {
-    response = await instance.get("/tickets");
+    response = await instance.get("/tickets?sortby=id&order=desc");
   } else {
-    response = await instance.get(`/tickets?status=${status}`);
+    response = await instance.get(`/tickets?sortby=id&order=desc&status=${status}`);
   }
   return await response.data;
 };

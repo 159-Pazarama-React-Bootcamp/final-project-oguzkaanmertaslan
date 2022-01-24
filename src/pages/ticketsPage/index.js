@@ -1,16 +1,11 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { getTicketsByStatus } from "../../services";
 import TicketCard from "./components/ticketCard";
-import { useDispatch } from "react-redux";
-import { saveTicket } from "../../redux/features/ticketsSlice";
 import "./styles.css";
 
 const Tickets = () => {
   const [tickets, setTickets] = useState();
   const [status, setStatus] = useState("all");
-
-  const dispatch=useDispatch();
-  dispatch(saveTicket(tickets))
 
   const getTickets = useCallback(async () => {
     const data = await getTicketsByStatus(status);

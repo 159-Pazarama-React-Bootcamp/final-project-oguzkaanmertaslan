@@ -6,6 +6,7 @@ import newTicket from "../../pages/newTicketPage";
 import checkTicket from "../../pages/checkTicketPage";
 import tickets from "../../pages/ticketsPage";
 import userTicket from "../../pages/userTicketPage";
+import statusTicketPage from "../../pages/statusTicketPage";
 
 const Navbar = () => {
   return (
@@ -35,7 +36,8 @@ const Navbar = () => {
           <Route path="/basvuru-olustur" component={newTicket} />
           <Route path="/basvuru-sorgula" component={checkTicket} />
           <Route path="/basvuru-basarili" component={userTicket} />
-
+          <Route path="/basvuru-basvuruno" component={statusTicketPage} />
+          
         </Switch>
       </Router>
     </div>

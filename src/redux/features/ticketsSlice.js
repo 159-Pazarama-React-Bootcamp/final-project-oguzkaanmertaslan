@@ -1,20 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    tickets:[]
+  tickets: {},
 };
 
 const ticketsSlice = createSlice({
   name: "tickets",
   initialState,
   reducers: {
-      saveTicket:(state,action)=>{
-          state.tickets.push(action.payload)
-      }
+    saveTicket: (state, action) => {
+      state.tickets=action.payload;
+    },
+
   },
 });
 
-export const {saveTicket} = ticketsSlice.actions;
-export const selectTicket=ticketState=>ticketState.tickets.tickets
-export default ticketsSlice.reducer;
+export const { saveTicket } = ticketsSlice.actions;
+export const selectTicket = (state) => state.tickets.tickets;
 
+export default ticketsSlice.reducer;

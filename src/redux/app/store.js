@@ -4,12 +4,10 @@ import ticketReducer from "../features/ticketsSlice"
 
 export const store = configureStore({
   reducer: {
-    userTicket: userTicketReducer
+    userTicket: userTicketReducer,
+    tickets: ticketReducer
   },
 });
 
-export const ticketStore = configureStore({
-  reducer: {
-    tisckets: ticketReducer
-  },
-});
+
+

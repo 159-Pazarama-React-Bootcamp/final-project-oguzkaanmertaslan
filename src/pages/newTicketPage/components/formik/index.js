@@ -10,6 +10,7 @@ import "./style.css";
 const Form = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  
   const [ticketNumber] = useState(
     `TCKT-${Math.floor(Math.random() * 90000) + 10000}`
   );
