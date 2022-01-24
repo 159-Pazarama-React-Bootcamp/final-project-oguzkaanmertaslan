@@ -16,7 +16,6 @@ const TicketCard = ({item}) => {
     default:
       break;
   }
-console.log(item);
   return (
     <div className="tickets" key={item.code}>
       <p>{item.code}</p>

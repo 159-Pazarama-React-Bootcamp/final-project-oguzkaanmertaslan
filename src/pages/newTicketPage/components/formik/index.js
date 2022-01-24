@@ -4,13 +4,12 @@ import * as Yup from "yup";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
 import { createTicket } from "../../../../services";
-import { saveTicket } from "../../../../redux/features/ticketSlice";
+import { saveUserTicket } from "../../../../redux/features/userTicketSlice";
 import "./style.css";
 
 const Form = () => {
-  
   const history = useHistory();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const [ticketNumber] = useState(
     `TCKT-${Math.floor(Math.random() * 90000) + 10000}`
   );
@@ -41,10 +40,12 @@ const Form = () => {
       validateSheme={validateSheme}
       onSubmit={(values) => {
         createTicket(values);
-        dispatch(saveTicket({
-          item:values
-        }))
-        history.push("/basvuru-basarili")
+        dispatch(
+          saveUserTicket({
+            item: values,
+          })
+        );
+        history.push("/basvuru-basarili");
       }}
     >
       {({ handleSubmit, handleChange, values, errors }) => (
@@ -108,7 +109,7 @@ const Form = () => {
               <input type="hidden" name="status" value={values.status} />
               <input type="hidden" name="code" value={values.code} />
               <div className="form-buton">
-                <button className="form-buttons">Dosya/Foğraf Ekle</button>
+                <button className="form-buttons">Dosya/Fotoğraf Ekle</button>
                 <div className="form-buton-2">
                   <button className="form-buttons-2" type="submit">
                     Süreç Başlat
