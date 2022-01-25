@@ -9,13 +9,11 @@ const ticketsSlice = createSlice({
   initialState,
   reducers: {
     saveTicket: (state, action) => {
-      state.tickets=action.payload;
+      state.tickets = action.payload;
     },
-
   },
 });
 
 export const { saveTicket } = ticketsSlice.actions;
 export const selectTicket = (state) => state.tickets.tickets;
-
 export default ticketsSlice.reducer;

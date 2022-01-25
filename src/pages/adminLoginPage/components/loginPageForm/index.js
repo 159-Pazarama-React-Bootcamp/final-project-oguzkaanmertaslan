@@ -3,11 +3,13 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getUser } from "../../../../services";
+import { useDispatch } from "react-redux";
+import { saveAdmin } from "../../../../redux/features/adminSlice";
 import "./style.css";
 
 const LoginPageForm = () => {
   const [login, setLogin] = useState({});
-
+  const dispatch = useDispatch()
   const history = useHistory();
 
   const getTickets = useCallback(async () => {
@@ -39,6 +41,7 @@ const LoginPageForm = () => {
         );
         
         if (isLoggedIn) {
+          dispatch(saveAdmin(true))
           history.push("/basvuru-listesi");
         } else {
           console.log("giriş başarısız");

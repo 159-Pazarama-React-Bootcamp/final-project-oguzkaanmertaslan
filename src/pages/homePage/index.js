@@ -1,16 +1,17 @@
 import React from "react";
 import {  useHistory } from "react-router-dom";
+
 import "./index.css";
 
 const HomePage = () => {
   const history=useHistory();
-
   const handleTicketForm=()=>{
     history.push("/basvuru-olustur")
   }
   const handleCheckForm=()=>{
     history.push("/basvuru-sorgula")
   }
+ 
   
   return (
     <div className="main-page">

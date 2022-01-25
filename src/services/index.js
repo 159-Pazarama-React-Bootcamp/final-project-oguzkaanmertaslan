@@ -23,8 +23,12 @@ const getTicketsByStatus = async (status) => {
   return await response.data;
 };
 
+const updateTicket = (id, updatedTicket) => {
+  return instance.put(`/tickets/${id}`, updatedTicket);
+};
+
 const getTicket = (id) => {
   return instance.get(`/tickets/${id}`);
 };
 
-export { createTicket, getTicket, getUser, getTicketsByStatus };
+export { createTicket, getTicket, getUser, getTicketsByStatus , updateTicket};

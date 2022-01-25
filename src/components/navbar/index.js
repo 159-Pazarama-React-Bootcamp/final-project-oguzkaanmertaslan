@@ -6,9 +6,15 @@ import newTicket from "../../pages/newTicketPage";
 import checkTicket from "../../pages/checkTicketPage";
 import tickets from "../../pages/ticketsPage";
 import userTicket from "../../pages/userTicketPage";
+import logOut from "../../pages/logOut";
 import statusTicketPage from "../../pages/statusTicketPage";
+import { useSelector } from "react-redux";
+import { selectAdmin } from "../../redux/features/adminSlice";
 
 const Navbar = () => {
+  const admin = useSelector(selectAdmin);
+  const isLoggedIn = localStorage.getItem("isLoggedIn") || admin;
+  console.log(admin);
   return (
     <div>
       <Router>
@@ -22,9 +28,20 @@ const Navbar = () => {
                 <li>
                   <Link to="/">Ana Sayfa</Link>
                 </li>
-                <li>
-                  <Link to="/admin">Giriş Yap</Link>
-                </li>
+                {isLoggedIn ? (
+                  <>
+                    <li>
+                      <Link to="/basvuru-listesi">Yönetim</Link>
+                    </li>{" "}
+                    <li>
+                      <Link to="/logout"> Çıkış Yap</Link>
+                    </li>{" "}
+                  </>
+                ) : (
+                  <li>
+                    <Link to="/admin">Giriş Yap</Link>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -37,7 +54,7 @@ const Navbar = () => {
           <Route path="/basvuru-sorgula" component={checkTicket} />
           <Route path="/basvuru-basarili" component={userTicket} />
           <Route path="/basvuru-basvuruno" component={statusTicketPage} />
-          
+          <Route path="/logout" component={logOut} />
         </Switch>
       </Router>
     </div>

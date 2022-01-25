@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { saveTicket } from "../../../../redux/features/ticketsSlice";
+import { getTicketsByStatus } from "../../../../services"
 
-const TicketCard = ({item}) => {
-  let statusStyle="";
+const TicketCard = ({ item }) => {
+
+  const [tickets, setTickets] = useState();
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const getTickets = useCallback(async () => {
+    const data = await getTicketsByStatus("all");
+    setTickets(data);
+  }, []);
+
+  useEffect(() => {
+    getTickets();
+  }, []);
+
+  let statusStyle = "";
   switch (item.status) {
     case "Bekliyor":
       statusStyle = "ticket-status-blue";
@@ -12,12 +31,18 @@ const TicketCard = ({item}) => {
     case "Kabuledildi":
       statusStyle = "ticket-status-green";
       break;
-
-    default:
-      break;
   }
+  const handleTicket = () => {
+    const ticketCode = tickets.find((value) => value.code === item.code);
+    if (ticketCode) {
+      dispatch(saveTicket(ticketCode));
+      history.push("/basvuru-basvuruno");
+    } else {
+      console.log("başarısız");
+    }
+  };
   return (
-    <div className="tickets" key={item.code}>
+    <div onClick={handleTicket} className="tickets" key={item.code}>
       <p>{item.code}</p>
       <p>{item.name}</p>
       <p>{item.surname}</p>

@@ -131,6 +131,7 @@
     justify-content: space-around;
     margin-top: -25px;
     width: 100%;
+    cursor: pointer;
   
   }
   .ticket-status-blue {

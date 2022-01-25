@@ -37,6 +37,7 @@ const Form = () => {
         address: "",
         status: "Bekliyor",
         code: ticketNumber,
+        description:"",
       }}
       validateSheme={validateSheme}
       onSubmit={(values) => {
@@ -109,6 +110,7 @@ const Form = () => {
               />
               <input type="hidden" name="status" value={values.status} />
               <input type="hidden" name="code" value={values.code} />
+              <input type="hidden" name="description" value={values.description} />
               <div className="form-buton">
                 <button className="form-buttons">Dosya/Fotoğraf Ekle</button>
                 <div className="form-buton-2">
