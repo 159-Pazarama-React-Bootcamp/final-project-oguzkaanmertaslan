@@ -15,7 +15,6 @@ import { selectAdmin } from "../../redux/features/adminSlice";
 const Navbar = () => {
   const admin = useSelector(selectAdmin);
   const isLoggedIn = localStorage.getItem("isLoggedIn") || admin;
-  console.log(admin);
   return (
     <div>
       <Router>

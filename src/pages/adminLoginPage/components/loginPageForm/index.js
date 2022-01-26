@@ -21,7 +21,7 @@ const LoginPageForm = () => {
     getTickets();
   }, [getTickets]);
 
-  const validateSheme = Yup.object({
+  const validationSchema = Yup.object({
     username: Yup.string().required("Zorunlu Alan"),
     password: Yup.string().required("Zorunlu Alan"),
   });
@@ -32,7 +32,9 @@ const LoginPageForm = () => {
         username: "",
         password: "",
       }}
-      validateSheme={validateSheme}
+      
+      validationSchema={validationSchema}
+
       onSubmit={(values) => {
         const isLoggedIn = login.find(
           (item) =>
@@ -48,14 +50,15 @@ const LoginPageForm = () => {
         }
       }}
     >
-      {({ handleSubmit, handleChange, values, errors }) => (
+      {({ handleSubmit, handleChange, values, errors, touched }) => (
         <div className="admin-page-area">
           <div className="admin-page-title">
             <h1>Sisteme Giriş Yapın</h1>
           </div>
           <form onSubmit={handleSubmit}>
             <div>
-              {errors.username ? errors.username : null}
+              {errors.username && touched.username ? <div>{errors.username}</div>  : null}
+
               <input
                 type="text"
                 name="username"
@@ -63,7 +66,8 @@ const LoginPageForm = () => {
                 onChange={handleChange}
                 value={values.username}
               />
-              {errors.surname ? errors.password : null}
+
+              {errors.password && touched.password ? <div>{errors.password}</div>  : null}
 
               <input
                 type="password"

@@ -6,8 +6,7 @@ import "./style.css";
 const UserTicket = () => {
   const userTicket = useSelector(selectUserTicket);
   const ticket = userTicket[0];
-  console.log("all",ticket);
-  console.log("user sayfası",ticket.item.file);
+  
   return (
     <div className="user-ticket-container">
       <div className="user-ticket-code-area">
