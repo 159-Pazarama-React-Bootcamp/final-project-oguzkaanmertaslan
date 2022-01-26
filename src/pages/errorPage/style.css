@@ -1,0 +1,36 @@
+.error-page-container{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #EEEEF6;
+    width: 75%;
+    margin-left: 12%;
+}
+
+.error-page-area{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.error-title{
+    font-weight: lighter;
+    font-size: 20px;
+    color: #141607;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.error-subtitle{
+    font-weight: lighter;
+    font-size: 15px;
+    color: #202210;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.error-img-area{
+    height: 100%;  
+    margin-left: 75px;
+    width: 100%;
+}

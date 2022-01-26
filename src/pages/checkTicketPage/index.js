@@ -30,7 +30,7 @@ const CheckTicket = () => {
       dispatch(saveTicket(ticketCode))
       history.push("/basvuru-basvuruno");
     }else{
-      console.log("başarısız");
+      history.push("/basvuru-bulunamadi");
     }
   };
 

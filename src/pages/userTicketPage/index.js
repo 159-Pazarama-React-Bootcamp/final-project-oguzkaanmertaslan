@@ -6,6 +6,8 @@ import "./style.css";
 const UserTicket = () => {
   const userTicket = useSelector(selectUserTicket);
   const ticket = userTicket[0];
+  console.log("all",ticket);
+  console.log("user sayfası",ticket.item.file);
   return (
     <div className="user-ticket-container">
       <div className="user-ticket-code-area">
@@ -39,7 +41,7 @@ const UserTicket = () => {
           <p>
             Adres: <b>{ticket.item.address}</b>
           </p>
-          <p>Photo: </p>
+          <p>Photo: <img src={ticket.item.file} height="200px" /></p>
           <p>
             Başvuru Kodu: <b>{ticket.item.code}</b>
           </p>

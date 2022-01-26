@@ -9,7 +9,9 @@ const StatusTicketPage = () => {
   const ticket = useSelector(selectTicket);
   const [input, setInput] = useState();
   const [status,setStatus]=useState(ticket.status);
+  
   const isLoggedIn = localStorage.getItem("isLoggedIn");
+
   const options = [
     { value: "Bekliyor", label: "Bekliyor" },
     { value: "Reddedildi", label: "Reddedildi" },

@@ -8,12 +8,13 @@ import { saveUserTicket } from "../../../../redux/features/userTicketSlice";
 import "./style.css";
 
 const Form = () => {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  
+  const [baseImage, setBaseImage] = useState("");
   const [ticketNumber] = useState(
     `TCKT-${Math.floor(Math.random() * 90000) + 10000}`
   );
+  const history = useHistory();
+  const dispatch = useDispatch();
+    console.log("Başvuru Sayfası",baseImage);
 
   const validateSheme = Yup.object({
     name: Yup.string()
@@ -26,6 +27,27 @@ const Form = () => {
     adress: Yup.string().required("Zorunlu Alan"),
   });
 
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setBaseImage(base64);
+  };
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
   return (
     <Formik
       initialValues={{
@@ -35,9 +57,10 @@ const Form = () => {
         tc: "",
         problem: "",
         address: "",
+        file:baseImage,
         status: "Bekliyor",
         code: ticketNumber,
-        description:"",
+        description: "",
       }}
       validateSheme={validateSheme}
       onSubmit={(values) => {
@@ -108,17 +131,25 @@ const Form = () => {
                 onChange={handleChange}
                 value={values.address}
               />
+              <input
+                type="file"
+                onChange={(e) => {
+                  uploadImage(e);
+                }}
+              />
+              <input type="hidden" name="file" value={values.file}/>
               <input type="hidden" name="status" value={values.status} />
               <input type="hidden" name="code" value={values.code} />
-              <input type="hidden" name="description" value={values.description} />
-              <div className="form-buton">
-                <button className="form-buttons">Dosya/Fotoğraf Ekle</button>
+              <input
+                type="hidden"
+                name="description"
+                value={values.description}
+              />
                 <div className="form-buton-2">
                   <button className="form-buttons-2" type="submit">
                     Süreç Başlat
                   </button>
                 </div>
-              </div>
             </div>
           </form>
         </div>

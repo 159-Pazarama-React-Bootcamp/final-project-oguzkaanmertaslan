@@ -8,6 +8,7 @@ import tickets from "../../pages/ticketsPage";
 import userTicket from "../../pages/userTicketPage";
 import logOut from "../../pages/logOut";
 import statusTicketPage from "../../pages/statusTicketPage";
+import errorPage from "../../pages/errorPage";
 import { useSelector } from "react-redux";
 import { selectAdmin } from "../../redux/features/adminSlice";
 
@@ -55,6 +56,8 @@ const Navbar = () => {
           <Route path="/basvuru-basarili" component={userTicket} />
           <Route path="/basvuru-basvuruno" component={statusTicketPage} />
           <Route path="/logout" component={logOut} />
+          <Route path="/basvuru-bulunamadi" component={errorPage} />
+
         </Switch>
       </Router>
     </div>
