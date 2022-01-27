@@ -4,14 +4,13 @@ import { useDispatch } from "react-redux";
 import { saveTicket } from "../../redux/features/ticketsSlice";
 import { getTicketsByStatus } from "../../services";
 
-
 import "./style.css";
 
 const CheckTicket = () => {
   const [input, setInput] = useState("");
-  const [tickets,setTickets]=useState();
+  const [tickets, setTickets] = useState();
 
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const getTickets = useCallback(async () => {
@@ -23,13 +22,12 @@ const CheckTicket = () => {
     getTickets();
   }, []);
 
-
   const handleStatusPage = () => {
-    const ticketCode=tickets.find((item)=>item.code===input)
+    const ticketCode = tickets.find((item) => item.code === input);
     if (ticketCode) {
-      dispatch(saveTicket(ticketCode))
-      history.push("/basvuru-basvuruno");
-    }else{
+      dispatch(saveTicket(ticketCode));
+      history.push(`/basvuru/${input}`);
+    } else {
       history.push("/basvuru-bulunamadi");
     }
   };

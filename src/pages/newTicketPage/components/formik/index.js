@@ -12,27 +12,32 @@ const Form = () => {
   const [ticketNumber] = useState(
     `TCKT-${Math.floor(Math.random() * 90000) + 10000}`
   );
+  console.log("deneme",baseImage)
   const history = useHistory();
   const dispatch = useDispatch();
-  console.log("Başvuru Sayfası", baseImage);
 
   const validationSchema = Yup.object({
     name: Yup.string()
-      .min(3, "must be at least 3 characters long")
-      .required("Zorunlu Alan"),
-    surname: Yup.string().required("Zorunlu Alan"),
-    age: Yup.number().required("Zorunlu Alan"),
-    tc: Yup.number().required("Zorunlu Alan"),
-    problem: Yup.string().required("Zorunlu Alan"),
-    address: Yup.string().required("Zorunlu Alan"),
+      .min(3, "En Az 3 Karakter Girmelisiniz")
+      .required("Bu Alan Boş Bırakılamaz!"),
+    surname: Yup.string()
+      .min(3, "En Az 3 Karakter Girmelisiniz")
+      .required("Bu Alan Boş Bırakılamaz!"),
+    age: Yup.number()
+      .min(18, "18-20 Yaş Arası Olmalısınız")
+      .max(120, "18-20 Yaş Arası Olmalısınız")
+      .required("Bu Alan Boş Bırakılamaz!"),
+    tc: Yup.number()
+      .min(10000000000, "Tc Kimlik Numaranız 11 Haneli Olmalıdır")
+      .max(99999999999, "Tc Kimlik Numaranız 11 Haneli Olmalıdır")
+      .required("Bu Alan Boş Bırakılamaz!"),
+    problem: Yup.string()
+      .min(10, "En Az 10 Karakter Girmelisiniz")
+      .required("Bu Alan Boş Bırakılamaz!"),
+    address: Yup.string()
+      .min(10, "En Az 10 Karakter Girmelisiniz")
+      .required("Bu Alan Boş Bırakılamaz!"),
   });
-
-  const uploadImage = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    setBaseImage(base64);
-  };
-
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -47,7 +52,12 @@ const Form = () => {
       };
     });
   };
-  console.log(baseImage);
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setBaseImage(base64);
+  };
 
   return (
     <Formik
@@ -66,18 +76,18 @@ const Form = () => {
       validationSchema={validationSchema}
       onSubmit={(values) => {
         createTicket(values);
+        console.log(baseImage)
         dispatch(
           saveUserTicket({
             item: values,
           })
         );
-        history.push("/basvuru-basarili");
+        history.push(`/basvuru-basarili`);
       }}
     >
       {({ handleSubmit, handleChange, values, errors, touched }) => (
         <div className="form-page">
           <div className="form-area-title">
-            <img src={baseImage} />
             <h1>Başvuru Süreci Başlatın</h1>
           </div>
           <form className="form-area" onSubmit={handleSubmit}>
@@ -93,7 +103,6 @@ const Form = () => {
               {errors.surname && touched.surname ? (
                 <div>{errors.surname}</div>
               ) : null}
-
               <Field
                 type="text"
                 name="surname"
@@ -140,14 +149,20 @@ const Form = () => {
                 value={values.address}
               />
               <Field
+                className="file-input"
                 type="file"
                 name="file"
                 value={values.file}
                 onChange={handleChange}
               />
-              <input type="hidden" name="file" value={values.file} onChange={(e) => {
+              <input
+                type="hidden"
+                name="file"
+                value={values.file}
+                onChange={(e) => {
                   uploadImage(e);
-                }} />
+                }}
+              />
               <input type="hidden" name="status" value={values.status} />
               <input type="hidden" name="code" value={values.code} />
               <input

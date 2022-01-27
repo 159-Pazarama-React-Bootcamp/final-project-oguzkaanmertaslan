@@ -6,7 +6,6 @@ import "./style.css";
 const UserTicket = () => {
   const userTicket = useSelector(selectUserTicket);
   const ticket = userTicket[0];
-  
   return (
     <div className="user-ticket-container">
       <div className="user-ticket-code-area">
@@ -20,33 +19,44 @@ const UserTicket = () => {
       </div>
       <div className="user-ticket-information-area">
         <div className="user-ticket-left-area">
-          <p>
-            Ad: <b>{ticket.item.name} </b>{" "}
-          </p>
-          <p>
-            Soyad: <b>{ticket.item.surname}</b>{" "}
-          </p>
-          <p>
-            Yaş: <b>{ticket.item.age}</b>{" "}
-          </p>
-          <p>
-            Tc: <b>{ticket.item.tc} </b>
-          </p>
-          <p>
-            Problem: <b>{ticket.item.problem}</b>
-          </p>
+          <div>
+            <p>Ad:</p>
+            <span>{ticket.item.name} </span>
+          </div>
+          <div>
+            <p>Soyad:</p>
+            <span>{ticket.item.surname} </span>
+          </div>
+          <div>
+            <p>Yaş:</p>
+            <span>{ticket.item.age} </span>
+          </div>
+          <div>
+            <p>Tc:</p>
+            <span>{ticket.item.tc} </span>
+          </div>
+          <div>
+            <p>Problem:</p>
+            <span>{ticket.item.problem} </span>
+          </div>
         </div>
         <div className="user-ticket-right-area">
-          <p>
-            Adres: <b>{ticket.item.address}</b>
-          </p>
-          <p>Photo: <img src={ticket.item.file} height="200px" /></p>
-          <p>
-            Başvuru Kodu: <b>{ticket.item.code}</b>
-          </p>
-          <p>
-            Durum: <b>{ticket.item.status}</b>
-          </p>
+          <div>
+            <p>Adres:</p>
+            <span>{ticket.item.address} </span>
+          </div>
+          <div>
+            <p>File:</p>
+            <span>{ticket.item.file} </span>
+          </div>
+          <div>
+            <p> Başvuru Kodu:</p>
+            <span>{ticket.item.code} </span>
+          </div>
+          <div>
+            <p>Durum:</p>
+            <span>{ticket.item.status} </span>
+          </div>
         </div>
       </div>
     </div>

@@ -53,7 +53,7 @@ const Navbar = () => {
           <Route path="/basvuru-olustur" component={newTicket} />
           <Route path="/basvuru-sorgula" component={checkTicket} />
           <Route path="/basvuru-basarili" component={userTicket} />
-          <Route path="/basvuru-basvuruno" component={statusTicketPage} />
+          <Route path="/basvuru" component={statusTicketPage} />
           <Route path="/logout" component={logOut} />
           <Route path="/basvuru-bulunamadi" component={errorPage} />
 

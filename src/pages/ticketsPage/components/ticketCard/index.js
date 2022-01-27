@@ -36,7 +36,7 @@ const TicketCard = ({ item }) => {
     const ticketCode = tickets.find((value) => value.code === item.code);
     if (ticketCode) {
       dispatch(saveTicket(ticketCode));
-      history.push("/basvuru-basvuruno");
+      history.push(`/basvuru/${item.code}`);
     } else {
       console.log("başarısız");
     }
