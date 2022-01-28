@@ -98,7 +98,7 @@ const Form = () => {
           </div>
           <form className="form-area" onSubmit={handleSubmit}>
             <div className="form-left">
-              {errors.name && touched.name ? <div>{errors.name}</div> : null}
+              {errors.name && touched.name ? <div className="error-message">{errors.name}</div> : null}
               <Field
                 type="text"
                 name="name"
@@ -107,7 +107,7 @@ const Form = () => {
                 value={values.name}
               />
               {errors.surname && touched.surname ? (
-                <div>{errors.surname}</div>
+                <div className="error-message">{errors.surname}</div>
               ) : null}
               <Field
                 type="text"
@@ -116,7 +116,7 @@ const Form = () => {
                 onChange={handleChange}
                 value={values.surname}
               />
-              {errors.age && touched.age ? <div>{errors.age}</div> : null}
+              {errors.age && touched.age ? <div className="error-message">{errors.age}</div> : null}
               <Field
                 type="text"
                 name="age"
@@ -124,7 +124,7 @@ const Form = () => {
                 onChange={handleChange}
                 value={values.age}
               />
-              {errors.tc && touched.tc ? <div>{errors.tc}</div> : null}
+              {errors.tc && touched.tc ? <div className="error-message">{errors.tc}</div> : null}
               <Field
                 type="text"
                 name="tc"
@@ -135,7 +135,7 @@ const Form = () => {
             </div>
             <div className="form-right">
               {errors.problem && touched.problem ? (
-                <div>{errors.problem}</div>
+                <div className="error-message">{errors.problem}</div>
               ) : null}
               <Field
                 type="text"
@@ -145,7 +145,7 @@ const Form = () => {
                 value={values.problem}
               />
               {errors.address && touched.address ? (
-                <div>{errors.address}</div>
+                <div className="error-message">{errors.address}</div>
               ) : null}
               <Field
                 type="text"
