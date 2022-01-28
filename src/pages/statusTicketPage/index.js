@@ -100,6 +100,10 @@ const StatusTicketPage = () => {
             <p>Açıklama: </p>
             <p>{ticket.description}</p>
           </div>
+          <div>
+            <p>Başvuru Tarih: </p>
+            <p>{ticket.date}</p>
+          </div>
           <div className="admin-area">
             {isLoggedIn ? (
               <>

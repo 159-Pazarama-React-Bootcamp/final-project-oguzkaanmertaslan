@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Formik } from "formik";
+import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getUser } from "../../../../services";
@@ -9,7 +9,7 @@ import "./style.css";
 
 const LoginPageForm = () => {
   const [login, setLogin] = useState({});
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const getTickets = useCallback(async () => {
@@ -20,10 +20,12 @@ const LoginPageForm = () => {
   useEffect(() => {
     getTickets();
   }, [getTickets]);
-
+  
   const validationSchema = Yup.object({
-    username: Yup.string().required("Zorunlu Alan"),
-    password: Yup.string().required("Zorunlu Alan"),
+    username: Yup.string().required("Bu Alan Boş Bırakılamaz"),
+    password: Yup.string()
+      .min(6, "Paralanız Minimum 6 Karakter İçermelidir")
+      .required("Bu Alan Boş Bırakılamaz"),
   });
 
   return (
@@ -32,21 +34,19 @@ const LoginPageForm = () => {
         username: "",
         password: "",
       }}
-      
       validationSchema={validationSchema}
-
       onSubmit={(values) => {
         const isLoggedIn = login.find(
           (item) =>
             item.username === values.username &&
             item.password === values.password
         );
-        
+
         if (isLoggedIn) {
-          dispatch(saveAdmin(true))
+          dispatch(saveAdmin(true));
           history.push("/basvuru-listesi");
         } else {
-          console.log("giriş başarısız");
+          alert("Kullanıcı Adı veya Şifre Hatalı")
         }
       }}
     >
@@ -55,11 +55,13 @@ const LoginPageForm = () => {
           <div className="admin-page-title">
             <h1>Sisteme Giriş Yapın</h1>
           </div>
-          <form onSubmit={handleSubmit}>
-            <div>
-              {errors.username && touched.username ? <div>{errors.username}</div>  : null}
+          <form className="login-form-area" onSubmit={handleSubmit}>
+            <div className="login-inputs">
+              {errors.username && touched.username ? (
+                <div>{errors.username}</div>
+              ) : null}
 
-              <input
+              <Field
                 type="text"
                 name="username"
                 placeholder="Kullanıcı Adı"
@@ -67,9 +69,11 @@ const LoginPageForm = () => {
                 value={values.username}
               />
 
-              {errors.password && touched.password ? <div>{errors.password}</div>  : null}
+              {errors.password && touched.password ? (
+                <div>{errors.password}</div>
+              ) : null}
 
-              <input
+              <Field
                 type="password"
                 name="password"
                 placeholder="Şifre"

@@ -12,9 +12,29 @@ const Form = () => {
   const [ticketNumber] = useState(
     `TCKT-${Math.floor(Math.random() * 90000) + 10000}`
   );
-  console.log("deneme",baseImage)
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setBaseImage(base64);
+  };
 
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -38,26 +58,12 @@ const Form = () => {
       .min(10, "En Az 10 Karakter Girmelisiniz")
       .required("Bu Alan Boş Bırakılamaz!"),
   });
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
 
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
-  const uploadImage = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    setBaseImage(base64);
-  };
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const newDate = `${year}-${month}-${day}`;
 
   return (
     <Formik
@@ -72,11 +78,11 @@ const Form = () => {
         status: "Bekliyor",
         code: ticketNumber,
         description: "",
+        date: newDate,
       }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
         createTicket(values);
-        console.log(baseImage)
         dispatch(
           saveUserTicket({
             item: values,
@@ -170,6 +176,7 @@ const Form = () => {
                 name="description"
                 value={values.description}
               />
+              <input type="hidden" name="date" value={values.date} />
               <div className="form-buton-2">
                 <button className="form-buttons-2" type="submit">
                   Süreç Başlat

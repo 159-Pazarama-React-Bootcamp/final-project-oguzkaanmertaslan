@@ -39,4 +39,9 @@
     border: 1px solid #141607;
   
   }
-  
+  .login-form-area{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+ 
